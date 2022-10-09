@@ -1,0 +1,14 @@
+{
+    "name": "sebastienflouvat/blog",
+    "autoload": {
+        "psr-4": {
+            "App\\": "/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sflouvat"
+        }
+    ],
+    "require": {}
+}
