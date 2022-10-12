@@ -9,4 +9,6 @@
     </main>
 </body>
 
+<?php include_once './Views/partials/footer.php' ?>
+
 </html>
