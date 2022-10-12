@@ -34,7 +34,7 @@ ob_start(); ?>
             <?php foreach($posts as $post) : ?>
                 <div class="col-sm-12 col-md-12 col-lg-6">
                         <div class="p-5 text-bg-dark rounded-3 mt-3" style="height:20em">
-                            <h2>Change the background</h2>
+                            <h3><?= $post->getTitle() ?></h3>
                             <ul class="post-tag">
                                 <?php foreach($post->getTags() as $tag) : ?>
                                     <li><?= (new TagRepository)->findOneBy(['id' => $tag->getTag()])[0]->getTitle() ?></li>
@@ -42,7 +42,7 @@ ob_start(); ?>
                             </ul>
                             <small>posté le <?= (new \Datetime($post->getCreatedAt()))->format('d/m/Y') ?></small>
                             <p class="mt-2"><?= substr($post->getChapo(),0,120) ?>...</p>
-                            <button class="btn btn-outline-light" type="button">Example button</button>
+                            <a href="/post/lire/<?= $post->getSlug() ?>" class="btn btn-outline-light" type="button">Lire le post</a>
                         </div>
                     </div>
             <?php endforeach ?>

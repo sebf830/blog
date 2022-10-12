@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Slugger;
 use App\Trait\EntityDateTrait;
 use App\Interface\EntityInterface;
 use App\Repository\PostRepository;
@@ -16,6 +17,7 @@ class Post extends PostRepository implements EntityInterface
     protected  $content; 
     protected  $chapo; 
     protected  $author; 
+    protected  $slug;
 
     public function getId(): ?int
     {
@@ -61,6 +63,15 @@ class Post extends PostRepository implements EntityInterface
     public function setAuthor(int $author): void
     {
         $this->author = $author;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+    public function setSlug(string $slug): void
+    {
+        $this->slug = Slugger::sluggify($slug);
     }
 
     public function getTags():array
