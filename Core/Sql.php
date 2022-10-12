@@ -8,7 +8,7 @@ use App\Models\User;
 
 class Sql extends Db
 {
-    private $pdo;
+    protected $pdo;
     private $table;
 
     public function __construct()
@@ -83,7 +83,7 @@ class Sql extends Db
         $class = "App\\Models\\" . ucfirst($this->table);
         $val = [];
         $sql = 'SELECT * FROM ' . $this->table;
-        $queryPrp = $this->pdo->prepareResquest($sql);
+        $queryPrp = $this->pdo->prepareResquest($sql, []);
 
         foreach($queryPrp->fetchAll(PDO::FETCH_ASSOC) as $row) {
             $object = new $class();

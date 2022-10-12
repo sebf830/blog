@@ -1,4 +1,6 @@
-<?php  ob_start(); ?>
+<?php  
+use App\Repository\TagRepository;
+ob_start(); ?>
 
 <header class="pb-3 mb-4 border-bottom">
     <nav>
@@ -28,63 +30,22 @@
         </div>
 
         <div class="row align-items-md-stretch mt-5 container-posts">
-            <div class="col-sm-12 col-md-12 col-lg-6">
-                <div class="p-5 text-bg-dark rounded-3 mt-3" style="height:20em">
-                    <h2>Change the background</h2>
-                    <ul class="post-tag">
-                        <li>symfony</li>
-                        <li>java</li>
-                        <li>webpack</li>
-                    </ul>
-                    <small>posté le 2022/09/22</small>
-                    <p class="mt-2">on look. Then, mix and match with additional component themes and more.
-                    </p>
-                    <button class="btn btn-outline-light" type="button">Example button</button>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6">
-                <div class="p-5 text-bg-dark rounded-3 mt-3" style="height:20em">
-                    <h2>Change the background</h2>
-                    <ul class="post-tag">
-                        <li>symfony</li>
-                        <li>java</li>
-                        <li>webpack</li>
-                    </ul>
-                    <small>posté le 2022/09/22</small>
-                    <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.
-                    </p>
-                    <button class="btn btn-outline-light" type="button">Example button</button>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6">
-                <div class="p-5 text-bg-dark rounded-3 mt-3" style="height:20em">
-                    <h2>Change the background</h2>
-                    <ul class="post-tag">
-                        <li>symfony</li>
-                        <li>java</li>
-                        <li>webpack</li>
-                    </ul>
-                    <small>posté le 2022/09/22</small>
-                    <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.
-                    </p>
-                    <button class="btn btn-outline-light" type="button">Example button</button>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6">
-                <div class="p-5 text-bg-dark rounded-3 mt-3" style="height:20em">
-                    <h2>Change the background</h2>
-                    <ul class="post-tag">
-                        <li>symfony</li>
-                        <li>java</li>
-                        <li>webpack</li>
-                    </ul>
-                    <small>posté le 2022/09/22</small>
-                    <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.
-                    </p>
-                    <button class="btn btn-outline-light" type="button">Example button</button>
-                </div>
-            </div>
             
+            <?php foreach($posts as $post) : ?>
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="p-5 text-bg-dark rounded-3 mt-3" style="height:20em">
+                            <h2>Change the background</h2>
+                            <ul class="post-tag">
+                                <?php foreach($post->getTags() as $tag) : ?>
+                                    <li><?= (new TagRepository)->findOneBy(['id' => $tag->getTag()])[0]->getTitle() ?></li>
+                                <?php endforeach ?>
+                            </ul>
+                            <small>posté le <?= (new \Datetime($post->getCreatedAt()))->format('d/m/Y') ?></small>
+                            <p class="mt-2"><?= substr($post->getChapo(),0,120) ?>...</p>
+                            <button class="btn btn-outline-light" type="button">Example button</button>
+                        </div>
+                    </div>
+            <?php endforeach ?>
         </div>
     </div>
 
@@ -102,4 +63,6 @@ $('#hamburger').on('click', function() {
 
 <?php $base = ob_get_clean(); ?>
 <?php require('./Views/layout/base.php'); ?>
+
+
 

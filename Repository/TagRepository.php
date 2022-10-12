@@ -2,17 +2,13 @@
 
 namespace App\Repository;
 
-use PDO;
 use App\core\Sql;
 use App\Interface\EntityInterface;
 use App\Interface\RepositoryInterface;
 
  
-class PostRepository extends Sql implements RepositoryInterface{
+class TagRepository extends Sql implements RepositoryInterface{
 
-
-    protected $pdo;
-    protected $table;
     public function __construct()
     {
         parent::__construct();

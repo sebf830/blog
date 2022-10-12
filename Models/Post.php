@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Trait\EntityDateTrait;
 use App\Interface\EntityInterface;
 use App\Repository\PostRepository;
+use App\Repository\PostsTagsRepository;
 
 class Post extends PostRepository implements EntityInterface
 {
@@ -60,5 +61,10 @@ class Post extends PostRepository implements EntityInterface
     public function setAuthor(int $author): void
     {
         $this->author = $author;
+    }
+
+    public function getTags():array
+    {
+        return (new PostsTagsRepository())->findBy(['post' => $this->getId()]);
     }
 }

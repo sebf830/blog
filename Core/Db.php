@@ -29,7 +29,7 @@ class Db
 		return self::$connection;
 	}
 
-	public function prepareResquest($sql, $array = [])
+	public function prepareResquest(string $sql, array $array)
 	{
 		$stmt = $this->PDOInst->prepare($sql);
 		$stmt->execute($array);
