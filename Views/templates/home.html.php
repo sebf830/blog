@@ -9,6 +9,14 @@ ob_start();
 
 <?php View::renderForm('form', $form) ?>
 
+<?php if (!empty($errors)) : ?>
+    <div class="">
+        <?php foreach ($errors as $error) : ?>
+            <p> <?= $error ?> </p>
+        <?php endforeach ?>
+    </div>
+<?php endif ?>
+
 
 <?php $base = ob_get_clean(); ?>
 <?php require('./Views/layout/base.php'); ?>

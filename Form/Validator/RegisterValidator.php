@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Core\Validator;
+namespace App\Form\Validator;
 
 class RegisterValidator
 {
-    public static function checkForm($config, $data): array
+    public static function checkForm($form, $data): array
     {
         $errors = [];
 
-        foreach ($config["inputs"] as $name => $input) {
+        foreach ($form["inputs"] as $name => $input) {
             if (!isset($data[$name])) {
                 $errors[] = "Il manque le champ :" . $name;
             }
