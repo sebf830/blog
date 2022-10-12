@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Repository\UserRepository;
 use App\Trait\EntityDateTrait;
+use App\Interface\EntityInterface;
+use App\Repository\UserRepository;
 
-class User extends UserRepository
+class User extends UserRepository implements EntityInterface
 {
     use EntityDateTrait;
 

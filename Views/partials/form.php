@@ -1,6 +1,6 @@
-<form method="<?= $config["config"]["method"] ?? "POST" ?>" action="<?= $config["config"]["action"] ?? "" ?>" id="<?= $config["config"]["id"] ?? "" ?>" class="<?= $config["config"]["class"] ?? "" ?>">
+<form method="<?= $form["config"]["method"] ?? "POST" ?>" action="<?= $form["config"]["action"] ?? "" ?>" id="<?= $form["config"]["id"] ?? "" ?>" class="<?= $form["config"]["class"] ?? "" ?>">
 
-    <?php foreach ($config["inputs"] as $name => $input) :
+    <?php foreach ($form["inputs"] as $name => $input) :
         switch ($input["type"]):
 
             # radio

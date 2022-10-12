@@ -1,10 +1,9 @@
 <?php
 namespace App\Controllers;
 
-use App\core\Sql;
 use App\core\View;
 use App\Repository\UserRepository;
-use App\Models\User;
+use App\Form\RegisterForm;
 
 class HomeController{
 
@@ -16,11 +15,14 @@ class HomeController{
         $userRepository = new UserRepository();
         $users = $userRepository->findAll(['id' => 1]);
 
+        $form = (new RegisterForm())->build();
+
 
         return View::render('home.html.php', [
             "salut" => $salut,
             "seb" => $seb,
-            "urlParam" => $urlParam
+            "urlParam" => $urlParam,
+            "form" => $form
         ]);
     }
 }

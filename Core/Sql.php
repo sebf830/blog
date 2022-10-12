@@ -17,7 +17,7 @@ class Sql extends Db
         $getCalledClass = explode('\\', strtolower(get_called_class())); 
         $this->table = str_replace('repository', '', end($getCalledClass));
     }
-
+ 
     protected function save(Object $class): void
     {
         $colums = get_object_vars($class); 
@@ -45,7 +45,7 @@ class Sql extends Db
         $queryPrp = $this->pdo->prepareResquest($sql, $criterias);
         while ($row = $queryPrp->fetch(PDO::FETCH_ASSOC)) {
                 array_push($val, $row);
-            }
+        }
 
         $object = new $class();
         foreach($val[0] as $key => $property){

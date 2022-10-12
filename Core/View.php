@@ -14,4 +14,12 @@ class View
         }
         include 'Views/templates/' . $vue;
     }
+
+    public static function renderForm($partial, $form): void
+    {
+        if (file_exists("Views/partials/{$partial}.php")) {
+            
+            include "views/partials/{$partial}.php";
+        }
+    }
 }

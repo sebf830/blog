@@ -3,19 +3,19 @@
 namespace App\Repository;
 
 use App\core\Sql;
+use App\Interface\EntityInterface;
 use App\Interface\RepositoryInterface;
 use App\Models\User;
 
  
 class UserRepository extends Sql implements RepositoryInterface{
 
-    private $table;
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function persist(User $user):void
+    public function persist(EntityInterface $user): void
     {
         $this->save($user);
     }
