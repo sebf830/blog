@@ -14,8 +14,8 @@ function displayError(?int $code):void
 {
     if(ENVIRONMENT == 'prod'){
         http_response_code($code);
-        $file = 'front/errors/' . $code . '.view.php';
-        if (file_exists("views/" . $file)) {
+        $file = 'Views/errors/' . $code . '.php';
+        if (file_exists($file)) {
             View::render($file);
         }
         die();
