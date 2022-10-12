@@ -2,7 +2,7 @@
 
 <p><?= $salut ?></p>
 <p><?= strtoupper($seb) ?></p>
-<p>param : <?= $id ?>
+<p>param : <?= $urlParam ?>
 
 
 <?php $base = ob_get_clean(); ?>

@@ -1,28 +1,29 @@
 <?php
 
-namespace App\core;
+namespace App\Core;
 
 use PDO;
 use App\core\Db;
+use App\Models\User;
 
-abstract class Sql extends Db
+class Sql extends Db
 {
     private $pdo;
     private $table;
-    private $prefix = DBPREFIXE;
 
     public function __construct()
     {
         $this->pdo = Db::connect(); 
         $getCalledClass = explode('\\', strtolower(get_called_class())); 
-        $this->table = $this->prefix . end($getCalledClass);
+        $this->table = str_replace('repository', '', end($getCalledClass));
     }
 
-    protected function persist(): void
+    protected function save(Object $class): void
     {
-        $colums = get_object_vars($this); 
+        $colums = get_object_vars($class); 
         $varToExplode = get_class_vars(get_class()); 
-        $colums = array_diff_key($colums, $varToExplode);
+        $colums = array_diff_key($colums, $varToExplode); 
+
         if ($colums['id'] == null) {
             $colums = array_diff($colums, [$colums['id']]);
             $sql = 'INSERT INTO ' . $this->table  . ' (' . implode(',', array_keys($colums)) . ') VALUES (:' . implode(',:', array_keys($colums)) . ')';
@@ -36,19 +37,26 @@ abstract class Sql extends Db
         $this->pdo->prepareResquest($sql, $colums);
     }
 
-    public function findOneBy($entrie)
+    public function getOneBy(array $criterias)
     {
+        $class = "App\\Models\\" . ucfirst($this->table);
         $val = [];
-        $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . array_keys($entrie)[0] . '=:' . array_keys($entrie)[0];
-        $queryPrp = $this->pdo->prepareResquest($sql, $entrie);
-        while ($row = $queryPrp->fetchObject(get_called_class())) {
-            array_push($val, $row);
+        $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . array_keys($criterias)[0] . '=:' . array_keys($criterias)[0];
+        $queryPrp = $this->pdo->prepareResquest($sql, $criterias);
+        while ($row = $queryPrp->fetch(PDO::FETCH_ASSOC)) {
+                array_push($val, $row);
+            }
+
+        $object = new $class();
+        foreach($val[0] as $key => $property){
+            $object->{"set" . ucfirst($key)}($property);
         }
-        return $val;
+        return $object;
     }
 
-    public function findBy($entrie)
+    public function getBy(array $entrie)
     {
+        $class = "App\\Models\\" . ucfirst($this->table);
         $val = [];
         $sql = 'SELECT * FROM ' . $this->table . ' WHERE ';
         foreach ($entrie as $key => $data) {
@@ -59,17 +67,31 @@ abstract class Sql extends Db
             }
         }
         $queryPrp = $this->pdo->prepareResquest($sql, $entrie);
-        while ($row = $queryPrp->fetchObject(get_called_class())) {
-            array_push($val, $row);
+
+        foreach($queryPrp->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $object = new $class();
+            foreach($row as $key => $property){
+                $object->{"set" . ucfirst($key)}($property);
+            }
+            $val[] = $object;
         }
         return $val;
     }
 
-    public function findAll()
+    public function getAll()
     {
+        $class = "App\\Models\\" . ucfirst($this->table);
+        $val = [];
         $sql = 'SELECT * FROM ' . $this->table;
         $queryPrp = $this->pdo->prepareResquest($sql);
 
-        return $queryPrp->fetchAll(PDO::FETCH_ASSOC);
+        foreach($queryPrp->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $object = new $class();
+            foreach($row as $key => $property){
+                $object->{"set" . ucfirst($key)}($property);
+            }
+            $val[] = $object;
+        }
+        return $val;
     }
 }
