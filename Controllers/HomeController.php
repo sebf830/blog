@@ -23,4 +23,14 @@ class HomeController{
             "socials" => $socialnetworks
         ]);
     }
+
+    public function resume(){
+
+        $file = '/public/uploads/fichier.pdf'; 
+            
+        header('Content-type: application/pdf'); 
+        header('Content-Disposition: attached; filename="' . $file . '"'); 
+        header('Content-Transfer-Encoding: binary'); 
+        header('Accept-Ranges: bytes');    
+    }
 }

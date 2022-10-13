@@ -9,7 +9,8 @@ class Routes{
     return [
       "hello" => ["controller" => "home", "action" => "index", "role" => ["user"]],
       "" => ["controller" => "home", "action" => "index", "role" => ["user"]],
-      "home" => ["controller" => "home", "action" => "index", "role" => ["user"]]
+      "home" => ["controller" => "home", "action" => "index", "role" => ["user"]],
+      "resume" => ["controller" => "home", "action" => "resume", "role" => ["user"]]
     ];
   } 
 }

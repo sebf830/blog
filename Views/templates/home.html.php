@@ -26,7 +26,7 @@ ob_start(); ?>
             <div class="container-fluid py-5 box-text">
                 <h1 class="display-5 fw-bold">Sébastien Flouvat</h1>
                 <p class="col-md-8 fs-4">Le développeur PHP dont vous ne pourrez plus vous passer.</p>
-                <a class="btn btn-outline-light btn-lg" type="button">Resume</a>
+                <a href="/resume" class="btn btn-outline-light btn-lg" type="button">Resume</a>
             </div>
         </div>
 
