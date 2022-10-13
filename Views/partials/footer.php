@@ -5,10 +5,13 @@
 
 <footer>
         <ul class="icons">
-            <li><a href="#"><ion-icon name="logo-whatsapp"></ion-icon></a></li>
-            <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-            <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
-            <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+            <?php foreach($socials as $social) : ?>
+                <li>
+                    <a href="<?= $social->getLink() ?>" target="blank">
+                        <ion-icon name="<?= $social->getIcon() ?>"></ion-icon>
+                    </a>
+                </li>
+            <?php endforeach ?>
         </ul>
         <ul class="menu">
                 <li><a href="#">Home</a></li>

@@ -15,17 +15,18 @@ ob_start(); ?>
             <a id="about" class="nav-buttons">About</a>
             <a class="nav-buttons">Contact</a>
             <a class="nav-buttons">Social</a>
-            <a class="nav-buttons login">Connexion/inscription</a>
+            <a href="/connexion" class="nav-buttons login">Connexion/inscription</a>
         </div>
     </nav>
 </header>
 
-    <div class="container py-4">
-        <div class="p-5 mb-4 bg-light rounded-3">
-            <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Sébastien Flouvat</h1>
-            <p class="col-md-8 fs-4">Le développeur PHP dont vous ne pourrez plus vous passer.</p>
-            <button class="btn btn-primary btn-lg" type="button">Resume</button>
+    <div class="container ">
+        <div class="p-5 mb-4 bg-light rounded-3 box">
+                <img class="imgback" src="/public/assets/img/header.jpeg" style="max-width:100%"/>
+            <div class="container-fluid py-5 box-text">
+                <h1 class="display-5 fw-bold">Sébastien Flouvat</h1>
+                <p class="col-md-8 fs-4">Le développeur PHP dont vous ne pourrez plus vous passer.</p>
+                <a class="btn btn-outline-light btn-lg" type="button">Resume</a>
             </div>
         </div>
 
@@ -52,7 +53,7 @@ ob_start(); ?>
 <script>
     $(document).ready(function() {
 
-//toggle nav
+
 $('#hamburger').on('click', function() {
   $('#list').toggleClass('height-auto');
   $('nav').toggleClass('height-fixed');
