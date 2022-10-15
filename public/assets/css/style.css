@@ -87,6 +87,18 @@ nav {
   height:9em;
 }
 
+#list .login a{
+  padding:2px 3px;
+  margin:0;
+}
+
+#list .login .nav-connexion:hover{
+  color: lightgreen;
+}
+#list .login .nav-inscription:hover{
+  color: lightblue;
+}
+
 
   /* contact */
 
@@ -168,7 +180,6 @@ nav {
     }
 
     .login{
-        padding : 5px;
         border:1px solid white;
         border-radius: 20px;
     }

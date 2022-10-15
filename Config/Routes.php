@@ -10,7 +10,9 @@ class Routes{
       "hello" => ["controller" => "home", "action" => "index", "role" => ["user"]],
       "" => ["controller" => "home", "action" => "index", "role" => ["user"]],
       "home" => ["controller" => "home", "action" => "index", "role" => ["user"]],
-      "resume" => ["controller" => "home", "action" => "resume", "role" => ["user"]]
+      "resume" => ["controller" => "home", "action" => "resume", "role" => ["user"]],
+      "inscription" => ["controller" => "registration", "action" => "index", "role" => ["user"]],
+      "connexion" => ["controller" => "login", "action" => "index", "role" => ["user"]],
     ];
   } 
 }

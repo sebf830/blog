@@ -48,14 +48,15 @@ class HomeController{
                     ]
                 ]);
             }
+
+            $success = "votre message a bien été envoyé";
         }
 
-        $success = "votre message a bien été envoyé";
 
         return View::render('home.html.php', [
             "socials" => $socialnetworks,
             "form" => $contactForm,
-            "success" => $success
+            "success" => isset($success) ? $success :  ""
         ]);
     }
 

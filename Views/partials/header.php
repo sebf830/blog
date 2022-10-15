@@ -11,7 +11,7 @@
             <a id="about" class="nav-buttons">About</a>
             <a class="nav-buttons">Blog</a>
             <a class="nav-buttons">Social</a>
-            <a href="/connexion" class="nav-buttons login">Connexion/inscription</a>
+            <span style="margin-left:30px;" class="nav-buttons login"><a class="nav-connexion" href="/connexion">Connexion</a>/<a class="nav-inscription" href="/inscription">inscription</a></span>
         </div>
     </nav>
 </header>

@@ -14,7 +14,7 @@ ob_start(); ?>
 
              <div id="ankle-form" class="mb-5"></div>
              <div class="contain mt-5">
-                <div class="form-wrapper row bg-light py-3" id="form-wrapper" >
+                <div class="form-wrapper bg-light py-3" id="form-wrapper" >
 
                     <?php if (!empty($validation)) : ?>
                         <div class="p-2 m-3" style="background:#ffb3b3;color:#cc0000;border:1px solid grey">
@@ -37,17 +37,6 @@ ob_start(); ?>
             </div>
         </div>  
     </div>
-
-<script>
-    $(document).ready(function() {
-
-
-$('#hamburger').on('click', function() {
-  $('#list').toggleClass('height-auto');
-  $('nav').toggleClass('height-fixed');
-})
-})
-</script>
 
 <?php $base = ob_get_clean(); ?>
 <?php require('./Views/layout/base.php'); ?>
