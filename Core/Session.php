@@ -28,9 +28,5 @@ class Session
     { 
         return $_SESSION;
     }
-    public function clear()
-    { 
-        session_unset();
-        session_destroy();
-    }
+    
 }

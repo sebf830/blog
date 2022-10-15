@@ -11,7 +11,11 @@
             <a id="about" class="nav-buttons">About</a>
             <a class="nav-buttons">Blog</a>
             <a class="nav-buttons">Social</a>
-            <span style="margin-left:30px;" class="nav-buttons login"><a class="nav-connexion" href="/connexion">Connexion</a>/<a class="nav-inscription" href="/inscription">inscription</a></span>
+            <?php if(!isset($_SESSION['email'])) : ?>
+                <span style="margin-left:30px;" class="nav-buttons login"><a class="nav-connexion" href="/connexion">Connexion</a>/<a class="nav-inscription" href="/inscription">inscription</a></span>
+            <?php else : ?>
+                <span style="margin-left:30px;" class="nav-buttons login"><a class="nav-connexion p-2" href="/logout">logout</a></span>
+            <?php endif ?>
         </div>
     </nav>
 </header>

@@ -5,8 +5,8 @@ ob_start(); ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
     <div class="col-md-6 mt-5">
-        <div class="card shadow-sm">
-        <div class="card-body">
+        <div class="card shadow-sm mt-5">
+        <div class="card-body mt-5">
 
             <?php if (!empty($validation)) : ?>
                 <div class="p-2 m-3" style="background:#ffb3b3;color:#cc0000;border:1px solid grey">
