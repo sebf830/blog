@@ -33,19 +33,23 @@ class RegistrationController{
             $user->setLastname($_POST['lastname']);
             $user->setEmail($_POST['email']);
             $user->setRole('user');
-            $user->setPassword($_POST['password']);
+            $user->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
 
             (new UserRepository)->persist($user);
             
             $success = 'Vous êtes inscrit sur le site, veuillez vous connecter ici : <a href="/connexion" ><small>connexion</small></a>';
+
+            return View::render('register.html.php', [
+                "form" => $registerForm,
+                "success" => $success,
+                "socials" => $socialnetworks,
+            ]);
         }
 
 
         return View::render('register.html.php', [
             "form" => $registerForm,
-            "success" => $success,
             "socials" => $socialnetworks,
-
         ]);
     }
 }

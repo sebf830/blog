@@ -71,7 +71,7 @@ class User extends UserRepository implements EntityInterface
 
     public function setPassword(string $password): void
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->password = $password;
     }
 
 }
