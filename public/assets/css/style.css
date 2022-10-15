@@ -74,28 +74,21 @@ nav {
     opacity:0.5;
 }
 
-.box-text h1{
-    position:absolute;
-    top:13%;
-    left:10%;
-    color:white;
-}
-.box-text p{
-    position:absolute;
-    top:25%;
-    left:10%;
-    color:#52527a;
-    font-size:58px;
-    font-weight:bold;
-}
-.box-text a{
-    position:absolute;
-    top:45%;
-    left:10%;
-    color:white;
-    font-weight:bold;
-}
   /* header */
+
+
+  /* contact */
+  
+#contact-form{
+  width:100%;
+}
+
+#contact-form textarea{
+  height:9em;
+}
+
+
+  /* contact */
 
 
   @media (max-width: 750px){
@@ -125,7 +118,6 @@ nav {
     .nav-cont a span, .nav-cont a svg{
         color:black;
       }
-
   }
 
   @media (max-width: 992px) {
@@ -135,8 +127,16 @@ nav {
   }
   
   @media (min-width: 750px) {
+
+    .contact-title, .contacts-info{
+      text-align:left;
+    }
+
+    #contact-form{
+      width:60%;
+    }
+
     #hamburger {
-        
         display: none;
     }
     #list {
@@ -188,7 +188,7 @@ nav {
         background: purple;
         border-radius: 8px
     }
-  }
+}
 
 /** footer **/
 

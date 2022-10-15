@@ -16,3 +16,11 @@ define("DBPWD", "root");
 
 # define domain name
 define('DOMAIN', 'mon-blog.fr');
+
+
+# mail vars
+define("MAILHOST", "smtp.gmail.com");
+define("MAILENCRYPT", "tls");
+define("MAILPORT", "587");
+define("MAILUSER", "seb.blog.openclassrooms@gmail.com");
+define("MAILPSWD", "ausmmostgjiptsjc");

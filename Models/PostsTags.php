@@ -8,7 +8,6 @@ use App\Repository\PostsTagsRepository;
 
 class PostsTags extends PostsTagsRepository implements EntityInterface
 {
-    use EntityDateTrait;
 
     protected  $id = null; 
     protected  $post; 

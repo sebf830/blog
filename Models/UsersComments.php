@@ -8,8 +8,6 @@ use App\Repository\UsersCommentsRepository;
 
 class UsersComments extends UsersCommentsRepository implements EntityInterface
 {
-    use EntityDateTrait;
-
     protected  $id = null; 
     protected  $user; 
     protected  $comment; 

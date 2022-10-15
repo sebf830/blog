@@ -8,8 +8,6 @@ use App\Repository\TagRepository;
 
 class Tag extends TagRepository implements EntityInterface
 {
-    use EntityDateTrait;
-
     protected  $id = null; 
     protected  $title;
 

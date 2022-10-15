@@ -8,8 +8,6 @@ use App\Repository\SocialNetworkRepository;
 
 class SocialNetwork extends SocialNetworkRepository implements EntityInterface
 {
-    use EntityDateTrait;
-
     protected  $id = null; 
     protected  $name; 
     protected  $link; 

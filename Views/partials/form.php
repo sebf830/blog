@@ -73,7 +73,3 @@
         <?php endswitch; ?>
     <?php endforeach; ?>
 
-    <input type="submit" value="<?= $config["config"]["submit"] ?? "Envoyer" ?>">
-
-
-</form>

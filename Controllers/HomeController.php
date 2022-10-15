@@ -2,25 +2,60 @@
 namespace App\Controllers;
 
 use App\core\View;
-use App\Form\RegisterForm;
-use App\Repository\TagRepository;
-use App\Repository\PostRepository;
-use App\Repository\UserRepository;
-use App\Repository\PostsTagsRepository;
-use App\Form\Validator\RegisterValidator;
+use App\Form\ContactForm;
+use App\Helpers\Mail;
+use App\Form\Validator\ContactValidator;
 use App\Repository\SocialNetworkRepository;
+
 
 class HomeController{
 
     public function index($urlParam){
 
-        $posts = (new PostRepository())->findAll();
-
         $socialnetworks = (new SocialNetworkRepository)->findAll();
+        $contactForm = (new ContactForm)->build();
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+			$validation = ContactValidator::checkForm($contactForm, $_POST);
+
+			// send errors
+			if ($validation && count($validation) > 0) {
+				return View::render('home.html.php', [
+                    "socials" => $socialnetworks,
+                    "form" => $contactForm,
+                    "validation" => $validation
+                ]);
+			}
+
+            // send email
+            $mail = new Mail();
+            $mail->sendTo("seb.blog.openclassrooms@gmail.com");
+            $mail->subject("Message de contact");
+            $mail->message("<h1>Bonjour Admin, Vous avez un nouveau message</h1>
+                <p>De : " .$_POST['firstname']. " " .$_POST['lastname']. "</p>
+                <p>Envoyé le : " .date('d/m/Y'). "</p>
+                <p>Contenu : " .$_POST['message']. "</p>"
+            );
+
+            if (!$mail->send()) {
+                return View::render('home.html.php', [
+                    "socials" => $socialnetworks,
+                    "socials" => $socialnetworks,
+                    "form" => $contactForm,
+                    "validation" => [
+                        "Votre email n'a pas été envoyé, veuillez re-essayer ulterieurement"
+                    ]
+                ]);
+            }
+        }
+
+        $success = "votre message a bien été envoyé";
 
         return View::render('home.html.php', [
-            "posts" => $posts,
-            "socials" => $socialnetworks
+            "socials" => $socialnetworks,
+            "form" => $contactForm,
+            "success" => $success
         ]);
     }
 

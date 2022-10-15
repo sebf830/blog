@@ -22,4 +22,9 @@ class View
             include "views/partials/{$partial}.php";
         }
     }
+
+    public static function endForm(): void
+    {
+       echo '</form>';
+    }
 }
