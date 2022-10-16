@@ -8,7 +8,7 @@ ob_start(); ?>
     <div class="row" style="margin-top:3em">
         <?php foreach($posts as $post) : ?>
             <div class="col-md-6 mt-3">
-                <div class="p-4 text-bg-dark rounded-3">
+                <div class="p-4 text-bg-light rounded-3 border shadow">
                     <h3><?= $post->getTitle() ?></h3>
                         <div class="post-tag mb-4">
                             <?php foreach ((new PostsTagsRepository)->findBy(['post' => $post->getId()]) as $tag) : ?>
@@ -16,7 +16,7 @@ ob_start(); ?>
                             <?php endforeach ?>
                         </div>
                     <p><?= substr($post->getContent(), 0, 100) ?>...</p>
-                    <a class="btn btn-outline-light" type="button" href="/post/<?= $post->getSlug() ?>">Lire l'article</a>
+                    <a class="btn btn-outline-dark" type="button" href="/post/lire/<?= $post->getSlug() ?>">Lire l'article</a>
                 </div>
             </div>
         <?php endforeach ?>

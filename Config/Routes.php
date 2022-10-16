@@ -7,14 +7,19 @@ class Routes{
   # array(path, controller, method, role)
   public static function getRoutes(){
     return [
-      "hello" => ["controller" => "home", "action" => "index", "role" => ["user"]],
+      // hompeage
       "" => ["controller" => "home", "action" => "index", "role" => ["user"]],
       "home" => ["controller" => "home", "action" => "index", "role" => ["user"]],
       "resume" => ["controller" => "home", "action" => "resume", "role" => ["user"]],
+
+      // signin/signup
       "inscription" => ["controller" => "registration", "action" => "index", "role" => ["user"]],
       "connexion" => ["controller" => "login", "action" => "index", "role" => ["user"]],
       "logout" => ["controller" => "login", "action" => "logout", "role" => ["user"]],
-      "posts" => ["controller" => "post", "action" => "index", "role" => ["user"]]
+
+      // posts
+      "posts" => ["controller" => "post", "action" => "index", "role" => ["user"]],
+      "post" => ["controller" => "post", "action" => "show", "role" => ["user"]]
     ];
   } 
 }
