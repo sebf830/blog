@@ -1,10 +1,13 @@
 <?php  
+use App\core\View;
 use App\Repository\TagRepository;
 use App\Repository\PostsTagsRepository;
 
 ob_start(); ?>
 
-
+<?php if(isset($_SESSION['flash'])) : ?>
+    <p class=" alert alert-success m-0 text-center" ><?= $_SESSION['flash'] ?></p>
+<?php endif ?>
 <div class="bg-secondary m-0 p-0 titlePostShowBox pt-5" style="height:20em;width:100%">
     <h4 class="mt-5 text-center text-white text-center titlePostShow"><?= $post->getTitle() ?></h4>
 </div>
@@ -33,8 +36,29 @@ ob_start(); ?>
             </div>
         </div>
     </div>
-</div>
+    <hr class="px-5 mt-5">
+    <div id="ankle-form-comment"></div>
+    <div class="row">
+        <div class="col-md-6 mx-auto mt-5">
+            <?php if (!empty($validation)) : ?>
+                <div class="p-2 m-3" style="background:#ffb3b3;color:#cc0000;border:1px solid grey">
+                    <?php foreach ($validation as $error) : ?>
+                        <p> <?= $error ?> </p>
+                    <?php endforeach ?>
+                </div>
+            <?php endif ?>
 
+            <h5>Commentaires</h5>
+            <?php View::renderForm("form",  $form) ?>
+                <button type="submit" class="btn btn-secondary">envoyer</button>
+            <?php View::endForm() ?> 
+        </div>
+    </div>
+
+</div>
+<?php if(isset($_SESSION['flash'])) : ?>
+    <?php unset($_SESSION['flash']) ?>
+<?php endif ?>
 
 
 <?php $base = ob_get_clean(); ?>

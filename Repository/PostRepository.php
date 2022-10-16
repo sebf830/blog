@@ -18,9 +18,9 @@ class PostRepository extends Sql implements RepositoryInterface{
         parent::__construct();
     }
 
-    public function persist(EntityInterface $user): void
+    public function persist(EntityInterface $entity): void
     {
-        $this->save($user);
+        $this->save($entity);
     }
 
     public function findOneBy(array $criterias):array{

@@ -39,6 +39,7 @@ class LoginController{
             $session->set('lastname', $_POST['firstname']);
             $session->set('email', $_POST['email']);
             $session->set('role', $user->getRole());
+            $session->set('id', $user->getid());
 
             header('Location:/home');
         }
