@@ -34,7 +34,7 @@ class PostController{
         $author = (new UserRepository)->findOneBy(['id' => 1])[0];
 
         $commentForm = (new CommentForm())->build();
-
+        $comments = (new CommentRepository)->getCommentsByPost($author->getId(), $post->getId());
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -70,7 +70,8 @@ class PostController{
             "socials" => $socialnetworks,
             "post" => $post,
             "author" => $author,
-            "form" => $commentForm
+            "form" => $commentForm,
+            "comments" => $comments
         ]);
     }
 }

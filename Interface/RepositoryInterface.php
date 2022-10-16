@@ -15,7 +15,7 @@ interface RepositoryInterface{
      * find many objects from an entity, with search criterias
      * @return array : collection
      */
-    public function findBy(array $criterias): array;
+    public function findBy(array $criterias, ?array $subcriterias): array;
 
     /**
      * find one object from entity, with search criterias

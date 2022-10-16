@@ -29,8 +29,8 @@ class UserRepository extends Sql implements RepositoryInterface{
         return $this->getAll();
     }
 
-    public function findBy(array $criterias): array
+    public function findBy(array $criterias, ?array $subcriterias = null): array
     {
-        return $this->getBy($criterias);
+        return $this->getBy($criterias,  $subcriterias);
     }
 }

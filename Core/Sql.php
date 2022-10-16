@@ -54,7 +54,7 @@ class Sql extends Db
         return $object;
     }
 
-    public function getBy(array $entrie)
+    public function getBy(array $entrie, ?array $criterias = null)
     {
         $class = "App\\Models\\" . ucfirst($this->table);
         $val = [];
@@ -66,6 +66,12 @@ class Sql extends Db
                 $sql .= $key . '=:' . $key;
             }
         }
+
+        
+        if($criterias != null){
+            $sql .= ' ORDER BY ' . key($criterias) . ' ' . $criterias[key($criterias)];
+        }
+
         $queryPrp = $this->pdo->prepareResquest($sql, $entrie);
 
         foreach($queryPrp->fetchAll(PDO::FETCH_ASSOC) as $row) {
