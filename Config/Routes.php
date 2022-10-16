@@ -19,7 +19,12 @@ class Routes{
 
       // posts
       "posts" => ["controller" => "post", "action" => "index", "role" => ["user"]],
-      "post" => ["controller" => "post", "action" => "show", "role" => ["user"]]
+      "post" => ["controller" => "post", "action" => "show", "role" => ["user"]],
+
+      // admin
+      "connexion-admin" => ["controller" => "admin", "action" => "connexion", "role" => ["admin"]],
+      "dashboard" => ["controller" => "admin", "action" => "dashboard", "role" => ["admin"]]
+
     ];
   } 
 }

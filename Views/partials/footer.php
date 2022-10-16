@@ -14,11 +14,15 @@
             <?php endforeach ?>
         </ul>
         <ul class="menu">
-                <li><a href="#">Home</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="/posts">Blog</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a href="#">Admin</a></li>
+                <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') : ?>
+                    <li><a href="/logout">Logout</a></li>
+                <?php else : ?>
+                    <li><a href="/connexion-admin">Admin</a></li>
+                <?php endif ?>
         </ul>
             <div class="footer-copyright">
                 <p>Copyright @ 2022 All Rights Reserved.</p>
