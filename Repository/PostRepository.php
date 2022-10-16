@@ -18,9 +18,9 @@ class PostRepository extends Sql implements RepositoryInterface{
         parent::__construct();
     }
 
-    public function persist(EntityInterface $user): void
+    public function persist(EntityInterface $entity): void
     {
-        $this->save($user);
+        $this->save($entity);
     }
 
     public function findOneBy(array $criterias):array{
@@ -32,8 +32,8 @@ class PostRepository extends Sql implements RepositoryInterface{
         return $this->getAll();
     }
 
-    public function findBy(array $criterias): array
+    public function findBy(array $criterias, ?array $subcriterias = null): array
     {
-        return $this->getBy($criterias);
+        return $this->getBy($criterias,  $subcriterias);
     }
 }
