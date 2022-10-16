@@ -99,8 +99,23 @@ nav {
   color: lightblue;
 }
 
-
   /* contact */
+
+  /* tag */
+
+.post-tag{
+    display:flex;
+}
+.post-tag span{
+    margin-right:3px;
+    padding:0px 8px;
+    background: purple;
+    border-radius: 8px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* tag */
 
 
   @media (max-width: 750px){
@@ -186,18 +201,6 @@ nav {
 
     .container-posts{
         padding: 0 50px;
-    }
-
-    .post-tag{
-        display:flex;
-        align-items:flex-start;
-        margin-left:-29px;
-    }
-    .post-tag li{
-        margin-right:3px;
-        padding:0px 8px;
-        background: purple;
-        border-radius: 8px
     }
 }
 

@@ -13,7 +13,8 @@ class Routes{
       "resume" => ["controller" => "home", "action" => "resume", "role" => ["user"]],
       "inscription" => ["controller" => "registration", "action" => "index", "role" => ["user"]],
       "connexion" => ["controller" => "login", "action" => "index", "role" => ["user"]],
-      "logout" => ["controller" => "login", "action" => "logout", "role" => ["user"]]
+      "logout" => ["controller" => "login", "action" => "logout", "role" => ["user"]],
+      "posts" => ["controller" => "post", "action" => "index", "role" => ["user"]]
     ];
   } 
 }

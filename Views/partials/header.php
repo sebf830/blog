@@ -9,7 +9,7 @@
         </div>
         <div id="list">
             <a id="about" class="nav-buttons">About</a>
-            <a class="nav-buttons">Blog</a>
+            <a class="nav-buttons" href="/posts">Blog</a>
             <a class="nav-buttons">Social</a>
             <?php if(!isset($_SESSION['email'])) : ?>
                 <span style="margin-left:30px;" class="nav-buttons login"><a class="nav-connexion" href="/connexion">Connexion</a>/<a class="nav-inscription" href="/inscription">inscription</a></span>
