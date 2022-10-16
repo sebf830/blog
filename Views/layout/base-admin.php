@@ -5,7 +5,7 @@
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
         <main>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand d-block px-3" href="index.html">My blog</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -17,23 +17,29 @@
                         <span class="nav-link-text">Dashboard</span>
                     </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                    <a class="nav-link" href="#">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="post">
+                    <a class="nav-link" href="/creer-un-post">
                         <i class="fa fa-fw fa-area-chart"></i>
                         <span class="nav-link-text">Créer un post</span>
                     </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="tables.html">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="postUpdate">
+                    <a class="nav-link" href="#">
                         <i class="fa fa-fw fa-table"></i>
                         <span class="nav-link-text">Modifier un post</span>
                     </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="deletePost">
+                    <a class="nav-link" href="#">
                         <i class="fa fa-fw fa-wrench"></i>
                         <span class="nav-link-text">Supprimer un post</span>
                     </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-fw fa-wrench"></i>
+                            <span class="nav-link-text">Logout</span>
+                        </a>
                     </li>
 
                 </ul>
@@ -42,12 +48,6 @@
                     <a class="nav-link text-center" id="sidenavToggler">
                         <i class="fa fa-fw fa-angle-left"></i>
                     </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                    <a class="nav-link d-block" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
                     </li>
                 </ul>
             </div>

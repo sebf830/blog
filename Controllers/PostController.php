@@ -27,8 +27,6 @@ class PostController{
 
     public function show($slug){
 
-        $_SESSION['id'] = 1;
-
         $socialnetworks = (new SocialNetworkRepository)->findAll();
         $post = (new PostRepository)->findOneBy(['slug' => $slug])[0];
         $author = (new UserRepository)->findOneBy(['id' => 1])[0];

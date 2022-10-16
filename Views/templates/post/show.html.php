@@ -73,8 +73,6 @@ ob_start(); ?>
         </div>
     </div>
 
-
-
 </div>
 <?php if(isset($_SESSION['flash'])) : ?>
     <?php unset($_SESSION['flash']) ?>
