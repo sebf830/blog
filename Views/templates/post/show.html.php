@@ -1,4 +1,7 @@
 <?php  
+use App\Repository\TagRepository;
+use App\Repository\PostsTagsRepository;
+
 ob_start(); ?>
 
 
@@ -10,6 +13,12 @@ ob_start(); ?>
         <div class="col-md-8 mx-auto text-left">
             <small><?= (new \DateTime($post->getCreatedAt()))->format('d/m/Y') ?> à </small>
             <small><?= (new \DateTime($post->getCreatedAt()))->format('H:i') ?></small>
+
+            <div class="post-tag mb-4 mt-2">
+                <?php foreach ((new PostsTagsRepository)->findBy(['post' => $post->getId()]) as $tag) : ?>
+                        <span><?= (new TagRepository)->findOneBy(['id' => $tag->getId()])[0]->getTitle() ?></span>
+                <?php endforeach ?>
+            </div>
 
             <p class="my-5"><?= $post->getContent() ?></p>
 
