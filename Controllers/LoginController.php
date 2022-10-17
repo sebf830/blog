@@ -4,9 +4,7 @@ namespace App\Controllers;
 use App\core\View;
 use App\core\Session;
 use App\Form\LoginForm;
-use App\Form\RegisterForm;
 use App\Repository\UserRepository;
-use App\Form\Validator\RegisterValidator;
 use App\Repository\SocialNetworkRepository;
 
 class LoginController{

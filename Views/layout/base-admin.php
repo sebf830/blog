@@ -12,7 +12,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/dashboard">
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
                     </a>
@@ -24,15 +24,9 @@
                     </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="postUpdate">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/modifier-un-post">
                         <i class="fa fa-fw fa-table"></i>
-                        <span class="nav-link-text">Modifier un post</span>
-                    </a>
-                    </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="deletePost">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-fw fa-wrench"></i>
-                        <span class="nav-link-text">Supprimer un post</span>
+                        <span class="nav-link-text">Modifier/supprimer</span>
                     </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">

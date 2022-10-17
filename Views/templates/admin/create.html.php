@@ -35,11 +35,6 @@ ob_start(); ?>
     </div>
 </div>
 
-
-
-
-
-
 <?php unset($_SESSION['flash_success']) ?>
 <?php $baseAdmin = ob_get_clean(); ?>
 <?php require('./Views/layout/base-admin.php'); ?>

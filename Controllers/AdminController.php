@@ -4,27 +4,34 @@ namespace App\Controllers;
 use App\core\View;
 use App\Models\Post;
 use App\core\Session;
-use App\Helpers\Mail;
 use App\Form\PostForm;
 use App\Form\LoginForm;
-use App\Form\ContactForm;
+use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Form\Validator\PostValidator;
-use App\Form\Validator\ContactValidator;
-use App\Repository\PostRepository;
 use App\Repository\SocialNetworkRepository;
 
 
 class AdminController{
 
+    private $postRepository;
+    private $userRepository;
+
+    public function __construct(){
+        $this->postRepository = new PostRepository;
+        $this->userRepository = new UserRepository;
+    }
+
     public function connexion($urlParam){
+
+        $socialnetworks = (new SocialNetworkRepository)->findAll();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			$validation = [];
 
-            $user = isset((new UserRepository)->findOneBy(['email' => $_POST['email']])[0]) ? 
-                (new UserRepository)->findOneBy(['email' => $_POST['email']])[0] : null;
+            $user = isset($this->userRepository->findOneBy(['email' => $_POST['email']])[0]) ? 
+                $this->userRepository->findOneBy(['email' => $_POST['email']])[0] : null;
 
             if(!password_verify($_POST['password'], $user->getPassword())){
 
@@ -32,7 +39,8 @@ class AdminController{
 
                 return View::render('admin/login.html.php', [
                     "form" => (new LoginForm)->build(),
-                    "validation" => $validation
+                    "validation" => $validation,
+                    "socials" => $socialnetworks
                 ]);
             }
 
@@ -41,7 +49,8 @@ class AdminController{
 
                 return View::render('admin/login.html.php', [
                     "form" => (new LoginForm)->build(),
-                    "validation" => $validation
+                    "validation" => $validation,
+                    "socials" => $socialnetworks
                 ]);
             }
 
@@ -55,14 +64,17 @@ class AdminController{
         }
 
         return View::render('admin/login.html.php', [
-            "form" => (new LoginForm)->build()
+            "form" => (new LoginForm)->build(),
+            "socials" => $socialnetworks
         ]);
     }
+
 
     public function dashboard(){
 
         return View::render('admin/dashboard.html.php', []);
     }
+
 
     public function createPost(){
 
@@ -87,7 +99,7 @@ class AdminController{
             $post->setSlug($_POST['title']);
             $post->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
 
-            (new PostRepository)->persist($post);
+            $this->postRepository->persist($post);
 
             $success = "Post crée avec succès";
 
@@ -99,6 +111,15 @@ class AdminController{
 
         return View::render('admin/create.html.php', [
             "form" => $postForm
+        ]);
+    }
+
+    public function showPosts(){
+
+        $posts = $this->postRepository->findAll();
+        
+        return View::render('admin/showPosts.html.php', [
+            "posts" => $posts
         ]);
     }
 }

@@ -37,5 +37,5 @@ ob_start(); ?>
     </div>
 </div>
 
-<?php $baseAdmin = ob_get_clean(); ?>
-<?php require('./Views/layout/base-admin.php'); ?>
+<?php $base = ob_get_clean(); ?>
+<?php require('./Views/layout/base.php'); ?>
