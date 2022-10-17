@@ -2,15 +2,18 @@
 namespace App\Controllers;
 
 use App\core\View;
+use App\Models\Tag;
 use App\Models\Post;
 use App\core\Session;
 use App\Form\PostForm;
 use App\Form\LoginForm;
+use App\Models\PostsTags;
+use App\Repository\TagRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Form\Validator\PostValidator;
+use App\Repository\PostsTagsRepository;
 use App\Repository\SocialNetworkRepository;
-
 
 class AdminController{
 
@@ -78,6 +81,7 @@ class AdminController{
 
     public function createPost(){
 
+        $_SESSION['id'] = 1;
         $postForm = (new PostForm)->build();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -98,9 +102,32 @@ class AdminController{
             $post->setAuthor($_SESSION['id']);
             $post->setSlug($_POST['title']);
             $post->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
-
+            
             $this->postRepository->persist($post);
 
+            $tags = explode('#', str_replace(' ', '',  $_POST['tags']));
+            foreach($tags as $tag){
+                $tagEntry = (new TagRepository)->findOneBy(['title' => $tag]);
+
+                // if tag exists
+                if($tagEntry != null){
+                    // add tag to the new post
+                    $postTag = new PostsTags();
+                    $postTag->setPost($post->getId());
+                    $postTag->setTag($tagEntry[0]->getId());
+                }else{
+                    // create a new tag
+                    $tagEntity = new Tag();
+                    $tagEntity->setTitle(strtoupper($tag));
+                    (new TagRepository)->persist($tagEntity);
+
+                    // add the new tag to the post list
+                    $postTag = new PostsTags();
+                    $postTag->setPost($post->getId());
+                    $postTag->setTag($tagEntity->getId());
+                }
+                (new PostsTagsRepository)->persist($postTag);
+            }
             $success = "Post crée avec succès";
 
             return View::render('admin/create.html.php', [

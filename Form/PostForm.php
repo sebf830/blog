@@ -44,7 +44,17 @@ class PostForm{
                     "min" => 2,
                     "max" => 4000,
                     "error" => " Votre contenu doit faire entre 2 et 4000 caractères",
-                ]
+                ],
+                "tags" => [
+                    "label" => "tags",
+                    "placeholder" => "Renseigner des tags séparés par un #",
+                    "type" => "text",
+                    "id" => "post-tags",
+                    "class" => "post-input form-control",
+                    "min" => 2,
+                    "max" => 1000,
+                    "error" => "Le titre doit faire entre 2 et 1000 caractères",
+                ],
             ]
         ];
     }
