@@ -22,6 +22,7 @@ class PostForm{
                     "min" => 2,
                     "max" => 200,
                     "error" => "Le titre doit faire entre 2 et 200 caractères",
+                    "value" => isset($params['title']) ? $params['title'] : ''
                 ],
                 "chapo" => [
                     "label" => "Chapo",
@@ -33,6 +34,8 @@ class PostForm{
                     "min" => 2,
                     "max" => 4000,
                     "error" => " Votre chapo doit faire entre 2 et 4000 caractères",
+                    "value" => isset($params['chapo']) ? $params['chapo'] : ''
+
                 ],
                 "content" => [
                     "label" => "Contenu",
@@ -44,6 +47,8 @@ class PostForm{
                     "min" => 2,
                     "max" => 4000,
                     "error" => " Votre contenu doit faire entre 2 et 4000 caractères",
+                    "value" => isset($params['content']) ? $params['content'] : ''
+
                 ],
                 "tags" => [
                     "label" => "tags",
@@ -54,6 +59,8 @@ class PostForm{
                     "min" => 2,
                     "max" => 1000,
                     "error" => "Le titre doit faire entre 2 et 1000 caractères",
+                    "value" => isset($params['tags']) ? $params['tags'] : ''
+
                 ],
             ]
         ];

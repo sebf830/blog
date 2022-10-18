@@ -32,4 +32,9 @@ class PostsTagsRepository extends Sql implements RepositoryInterface{
     {
         return $this->getBy($criterias,  $subcriterias);
     }
+
+    public function deleteByPost($post){
+        $sql = 'DELETE FROM postsTags WHERE post = ?';
+        $req = $this->pdo->prepareResquest($sql, [$post]);
+    }
 }

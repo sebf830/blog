@@ -26,7 +26,7 @@ ob_start(); ?>
                             <td><?= (new \Datetime($post->getCreatedAt()))->format('d/m/Y') ?></td>
                             <td><?= $post->getUpdatedAt() != null ? (new \Datetime($post->getUpdatedAt()))->format('d/m/Y') : 'aucune' ?></td>
                             <td>
-                                <a href="#">
+                                <a href="/modifier/post/<?= $post->getSlug() ?>">
                                     <img src="https://cdn0.iconfinder.com/data/icons/phosphor-light-vol-3/256/pencil-line-light-1024.png" alt="" width="40" height="40"/>
                                 </a>
                             </td>

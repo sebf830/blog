@@ -19,10 +19,12 @@ class AdminController{
 
     private $postRepository;
     private $userRepository;
+    private $tagRepository;
 
     public function __construct(){
         $this->postRepository = new PostRepository;
         $this->userRepository = new UserRepository;
+        $this->tagRepository = new TagRepository;
     }
 
     public function connexion($urlParam){
@@ -104,10 +106,13 @@ class AdminController{
             $post->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
             
             $this->postRepository->persist($post);
+            $post = $this->postRepository->findOneBy(['slug' => $post->getSlug()])[0];
 
+            // create an array of tags
             $tags = explode('#', str_replace(' ', '',  $_POST['tags']));
             foreach($tags as $tag){
-                $tagEntry = (new TagRepository)->findOneBy(['title' => $tag]);
+                // check if tag exists
+                $tagEntry = $this->tagRepository->findOneBy(['title' => $tag]);
 
                 // if tag exists
                 if($tagEntry != null){
@@ -115,18 +120,22 @@ class AdminController{
                     $postTag = new PostsTags();
                     $postTag->setPost($post->getId());
                     $postTag->setTag($tagEntry[0]->getId());
+                    (new PostsTagsRepository)->persist($postTag);
+                    
                 }else{
                     // create a new tag
                     $tagEntity = new Tag();
                     $tagEntity->setTitle(strtoupper($tag));
-                    (new TagRepository)->persist($tagEntity);
+                    $this->tagRepository->persist($tagEntity);
+
+                    $tEntity = $this->tagRepository->findOneBy(['title' => $tagEntity->getTitle()]);
 
                     // add the new tag to the post list
                     $postTag = new PostsTags();
                     $postTag->setPost($post->getId());
-                    $postTag->setTag($tagEntity->getId());
+                    $postTag->setTag($tEntity[0] ->getId());
+                    (new PostsTagsRepository)->persist($postTag);
                 }
-                (new PostsTagsRepository)->persist($postTag);
             }
             $success = "Post crée avec succès";
 
@@ -147,6 +156,81 @@ class AdminController{
         
         return View::render('admin/showPosts.html.php', [
             "posts" => $posts
+        ]);
+    }
+
+    public function updatePost($slug){
+
+        $post = $this->postRepository->findOneBy(['slug' => $slug])[0];
+        $tagList = [];
+
+        foreach($post->getTags() as $tagPost){
+            $tagList[] = (new TagRepository)->findOneBy(['id' => $tagPost->getTag()])[0]->getTitle();
+        }
+
+        $updateForm = (new PostForm)->build([
+            'title' => $post->getTitle(),
+            'content' => $post->getContent(),
+            'chapo' => $post->getChapo(),
+            'tags' => implode('#', $tagList)
+        ]);
+        
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $validation = PostValidator::checkForm($updateForm, $_POST);
+			if ($validation && count($validation) > 0) {
+				return View::render('home.html.php', [
+                    'post' => $post,
+                    'form' => $updateForm,
+                    "validation" => $validation
+                ]);
+			}
+
+            $post->setTitle($_POST['title']);
+            $post->setSlug($_POST['title']);
+            $post->setChapo($_POST['chapo']);
+            $post->setContent($_POST['title']);
+
+
+            (new PostsTagsRepository)->deleteByPost($post->getId());
+
+            // create an array of tags
+            $tags = explode('#', str_replace(' ', '',  $_POST['tags']));
+            
+            foreach($tags as $tag){
+                // check if tag exists
+                $tagEntry = $this->tagRepository->findOneBy(['title' => $tag]);
+                
+                // if tag exists
+                if($tagEntry != null){
+                    // add tag to the new post
+                    $postTag = new PostsTags();
+                    $postTag->setPost($post->getId());
+                    $postTag->setTag($tagEntry[0]->getId());
+                    (new PostsTagsRepository)->persist($postTag);
+                }else{
+                    // create a new tag
+                    $tagEntity = new Tag();
+                    $tagEntity->setTitle(strtoupper($tag));
+                    $this->tagRepository->persist($tagEntity);
+
+                    $tEntity = $this->tagRepository->findOneBy(['title' => $tagEntity->getTitle()]);
+
+                    // add the new tag to the post list
+                    $postTag = new PostsTags();
+                    $postTag->setPost($post->getId());
+                    $postTag->setTag($tEntity[0]->getId());
+                    (new PostsTagsRepository)->persist($postTag);
+                }
+            }
+            $_SESSION['flash'] = "votre commentaire est enregistré";
+
+            header("Location:/modifier/post/{$post->getSlug()}");
+        }
+
+        return View::render('admin/updatePost.html.php', [
+            'post' => $post,
+            'form' => $updateForm
         ]);
     }
 }
