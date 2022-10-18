@@ -8,6 +8,7 @@ use App\core\Session;
 use App\Form\PostForm;
 use App\Form\LoginForm;
 use App\Models\PostsTags;
+use App\Helpers\StringHelper;
 use App\Repository\TagRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
@@ -36,10 +37,10 @@ class AdminController{
 
 			$validation = [];
 
-            $user = isset($this->userRepository->findOneBy(['email' => String::sanitize($_POST['email'])])[0]) ? 
-                $this->userRepository->findOneBy(['email' => String::sanitize($_POST['email'])])[0] : null;
+            $user = isset($this->userRepository->findOneBy(['email' => StringHelper::sanitize($_POST['email'])])[0]) ? 
+                $this->userRepository->findOneBy(['email' => StringHelper::sanitize($_POST['email'])])[0] : null;
 
-            if(!password_verify(String::sanitize($_POST['password']), $user->getPassword())){
+            if(!password_verify(StringHelper::sanitize($_POST['password']), $user->getPassword())){
 
                 $validation[] = "identifiants non reconnus";
 
@@ -61,9 +62,9 @@ class AdminController{
             }
 
             $session = new Session();
-            $session->set('firstname',String::sanitize($_POST['firstname']));
-            $session->set('lastname', String::sanitize($_POST['firstname']));
-            $session->set('email', String::sanitize($_POST['email']));
+            $session->set('firstname',StringHelper::sanitize($_POST['firstname']));
+            $session->set('lastname', StringHelper::sanitize($_POST['firstname']));
+            $session->set('email', StringHelper::sanitize($_POST['email']));
             $session->set('role', $user->getRole());
 
             header('Location:/dashboard');
@@ -111,15 +112,15 @@ class AdminController{
 			}
 
             $post = new Post();
-            $post->setTitle(String::sanitize($_POST['title']));
-            $post->setChapo(String::sanitize($_POST['chapo']));
-            $post->setContent(String::sanitize($_POST['content']));
+            $post->setTitle(StringHelper::sanitize($_POST['title']));
+            $post->setChapo(StringHelper::sanitize($_POST['chapo']));
+            $post->setContent(StringHelper::sanitize($_POST['content']));
             $post->setAuthor($_SESSION['id']);
-            $post->setSlug(String::sanitize($_POST['title']));
+            $post->setSlug(StringHelper::sanitize($_POST['title']));
             $post->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
             
             // if a title already exists in database
-            if($this->postRepository->findOneBy(['title' => String::sanitize($_POST['title'])])){
+            if($this->postRepository->findOneBy(['title' => StringHelper::sanitize($_POST['title'])])){
                 return View::render('admin/create.html.php', [
                     "form" => $postForm,
                     "validation" => ['Un  article avec le meme titre existe déja, veuillez modifier votre titre']
@@ -130,7 +131,7 @@ class AdminController{
             $post = $this->postRepository->findOneBy(['slug' => $post->getSlug()])[0];
 
             // create an array of tags
-            $tags = explode('#', str_replace(' ', '',  String::sanitize($_POST['tags'])));
+            $tags = explode('#', str_replace(' ', '',  StringHelper::sanitize($_POST['tags'])));
             foreach($tags as $tag){
                 // check if tag exists
                 $tagEntry = !empty($tag) ? $this->tagRepository->findOneBy(['title' => $tag]) : null;
@@ -207,10 +208,10 @@ class AdminController{
                 ]);
 			}
 
-            $post->setTitle(String::sanitize($_POST['title']));
-            $post->setSlug(String::sanitize($_POST['title']));
-            $post->setChapo(String::sanitize($_POST['chapo']));
-            $post->setContent(String::sanitize($_POST['title']));
+            $post->setTitle(StringHelper::sanitize($_POST['title']));
+            $post->setSlug(StringHelper::sanitize($_POST['title']));
+            $post->setChapo(StringHelper::sanitize($_POST['chapo']));
+            $post->setContent(StringHelper::sanitize($_POST['title']));
 
 
             (new PostsTagsRepository)->deleteByPost($post->getId());

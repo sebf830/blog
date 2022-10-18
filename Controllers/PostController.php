@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\core\View;
+use App\Helpers\StringHelper;
 use App\Models\Comment;
 use App\Form\CommentForm;
 use App\Repository\PostRepository;
@@ -50,10 +51,10 @@ class PostController{
 			}
 
             $comment = new Comment();
-            $comment->setTitle(String::sanitize($_POST['title']));
-            $comment->setContent(String::sanitize($_POST['content']));
+            $comment->setTitle(StringHelper::sanitize($_POST['title']));
+            $comment->setContent(StringHelper::sanitize($_POST['content']));
             $comment->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
-            $comment->setAuthor(String::sanitize($_SESSION['id']), 'int');
+            $comment->setAuthor(StringHelper::sanitize($_SESSION['id']), 'int');
             $comment->setPost($post->getId());
 
             (new CommentRepository())->persist($comment);

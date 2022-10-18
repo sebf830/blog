@@ -12,7 +12,7 @@ class View
             }
             extract($data);
         }
-        include 'Views/templates/' . $vue;
+        include 'Views/templates/'. $vue;
     }
 
     public static function renderForm($partial, $form): void

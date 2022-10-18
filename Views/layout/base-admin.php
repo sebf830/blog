@@ -31,7 +31,7 @@
                         </a>
                         </li>
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/logout">
                                 <i class="fa fa-fw fa-wrench"></i>
                                 <span class="nav-link-text">Logout</span>
                             </a>

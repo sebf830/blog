@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class Sanitizer
+class StringHelper
 {
     public static function sanitize(string $string, ?string $cast = null)
     {

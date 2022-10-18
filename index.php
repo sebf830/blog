@@ -56,11 +56,15 @@ $controller =  'App\\Controllers\\' . ucfirst(strtolower($routes[$uri[1]]['contr
 $action = strtolower($routes[$uri[1]]['action']);
 $role = $routes[$uri[1]]['role'];
 
-if (isset($_SESSION['role'])) {
-	if (!in_array($_SESSION['role'], $role) && !in_array('public', $role)) {
-		displayError(403);
-	}
-}
+// if (isset($_SESSION['role'])) {
+// 	if (!in_array($_SESSION['role'], $role) && !in_array('public', $role)) {
+// 		displayError(403);
+// 	}
+// }else{
+// 	if(!in_array('public', $role)){
+// 		displayError(403);
+// 	}
+// }
 
 $objectController = new $controller();
 

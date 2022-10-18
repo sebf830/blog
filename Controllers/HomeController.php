@@ -2,8 +2,9 @@
 namespace App\Controllers;
 
 use App\core\View;
-use App\Form\ContactForm;
 use App\Helpers\Mail;
+use App\Form\ContactForm;
+use App\Helpers\StringHelper;
 use App\Form\Validator\ContactValidator;
 use App\Repository\SocialNetworkRepository;
 
@@ -33,9 +34,9 @@ class HomeController{
             $mail->sendTo("seb.blog.openclassrooms@gmail.com");
             $mail->subject("Message de contact");
             $mail->message("<h1>Bonjour Admin, Vous avez un nouveau message</h1>
-                <p>De : " .$_POST['firstname']. " " .$_POST['lastname']. "</p>
+                <p>De : " . StringHelper::sanitize($_POST['firstname']). " " . StringHelper::sanitize($_POST['lastname']) . "</p>
                 <p>Envoyé le : " .date('d/m/Y'). "</p>
-                <p>Contenu : " .$_POST['message']. "</p>"
+                <p>Contenu : " . StringHelper::sanitize($_POST['message']) . "</p>"
             );
 
             if (!$mail->send()) {

@@ -8,18 +8,18 @@ class Routes{
   public static function getRoutes(){
     return [
       // hompeage
-      "" => ["controller" => "home", "action" => "index", "role" => ["user"]],
-      "home" => ["controller" => "home", "action" => "index", "role" => ["user"]],
-      "resume" => ["controller" => "home", "action" => "resume", "role" => ["user"]],
+      "" => ["controller" => "home", "action" => "index", "role" => ["public, admin"]],
+      "home" => ["controller" => "home", "action" => "index", "role" => ["public, admin"]],
+      "resume" => ["controller" => "home", "action" => "resume", "role" => ["public, admin"]],
 
       // signin/signup
-      "inscription" => ["controller" => "registration", "action" => "index", "role" => ["user"]],
-      "connexion" => ["controller" => "login", "action" => "index", "role" => ["user"]],
-      "logout" => ["controller" => "login", "action" => "logout", "role" => ["user"]],
+      "inscription" => ["controller" => "registration", "action" => "index", "role" => ["public, admin"]],
+      "connexion" => ["controller" => "login", "action" => "index", "role" => ["public, admin"]],
+      "logout" => ["controller" => "login", "action" => "logout", "role" => ["user, admin"]],
 
       // posts
-      "posts" => ["controller" => "post", "action" => "index", "role" => ["user"]],
-      "post" => ["controller" => "post", "action" => "show", "role" => ["user"]],
+      "posts" => ["controller" => "post", "action" => "index", "role" => ["public, admin"]],
+      "post" => ["controller" => "post", "action" => "show", "role" => ["public, admin"]],
 
       // admin
       "connexion-admin" => ["controller" => "admin", "action" => "connexion", "role" => ["admin"]],

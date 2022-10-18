@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\core\View;
 use App\Models\User;
 use App\Form\RegisterForm;
+use App\Helpers\StringHelper;
 use App\Repository\UserRepository;
 use App\Form\Validator\RegisterValidator;
 use App\Repository\SocialNetworkRepository;
@@ -29,11 +30,11 @@ class RegistrationController{
 			}
 
             $user = new User();
-            $user->setFirstname(String::sanitize($_POST['firstname']));
-            $user->setLastname(String::sanitize($_POST['lastname']));
-            $user->setEmail(String::sanitize($_POST['email']));
+            $user->setFirstname(StringHelper::sanitize($_POST['firstname']));
+            $user->setLastname(StringHelper::sanitize($_POST['lastname']));
+            $user->setEmail(StringHelper::sanitize($_POST['email']));
             $user->setRole('user');
-            $user->setPassword(password_hash(String::sanitize($_POST['password']), PASSWORD_DEFAULT));
+            $user->setPassword(password_hash(StringHelper::sanitize($_POST['password']), PASSWORD_DEFAULT));
 
             (new UserRepository)->persist($user);
             
