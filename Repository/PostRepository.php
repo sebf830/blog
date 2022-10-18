@@ -36,4 +36,9 @@ class PostRepository extends Sql implements RepositoryInterface{
     {
         return $this->getBy($criterias,  $subcriterias);
     }
+
+    public function delete($postId){
+        $sql = 'DELETE FROM post WHERE id = ?';
+        $req = $this->pdo->prepareResquest($sql, [$postId]);
+    }
 }

@@ -31,7 +31,7 @@ ob_start(); ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="#">
+                                <a href="/delete-post/<?= $post->getSlug() ?>" onclick="return confirm('Confirmer la suppression ?');">
                                     <img src="https://cdn3.iconfinder.com/data/icons/font-awesome-solid/512/trash-1024.png" alt="" width="40" height="40">
                                 </a>
                             </td>

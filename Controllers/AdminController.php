@@ -75,7 +75,6 @@ class AdminController{
         ]);
     }
 
-
     public function dashboard(){
 
         $users = $this->userRepository->findAll();
@@ -254,5 +253,17 @@ class AdminController{
             'post' => $post,
             'form' => $updateForm
         ]);
+    }
+
+    public function deletePost($slug)
+    {
+        $post = $this->postRepository->findOneBy(['slug' => $slug])[0];
+
+        // delete all relation post/tag relations
+        (new PostsTagsRepository)->deleteByPost($post->getId());
+
+        $this->postRepository->delete($post->getId());
+
+        header('Location:/modifier-un-post');
     }
 }

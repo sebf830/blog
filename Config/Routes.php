@@ -27,7 +27,7 @@ class Routes{
       "creer-un-post" => ["controller" => "admin", "action" => "createPost", "role" => ["admin"]],
       "modifier-un-post" => ["controller" => "admin", "action" => "showPosts", "role" => ["admin"]],
       "modifier" => ["controller" => "admin", "action" => "updatePost", "role" => ["admin"]],
-
+      "delete-post" => ["controller" => "admin", "action" => "deletePost", "role" => ["admin"]]
     ];
   } 
 }
