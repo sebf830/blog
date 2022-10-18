@@ -105,6 +105,14 @@ class AdminController{
             $post->setSlug($_POST['title']);
             $post->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
             
+            // if a title already exists in database
+            if($this->postRepository->findOneBy(['title' => $_POST['title']])){
+                return View::render('admin/create.html.php', [
+                    "form" => $postForm,
+                    "validation" => ['Un  article avec le meme titre existe déja, veuillez modifier votre titre']
+                ]);
+            }
+
             $this->postRepository->persist($post);
             $post = $this->postRepository->findOneBy(['slug' => $post->getSlug()])[0];
 
@@ -112,7 +120,7 @@ class AdminController{
             $tags = explode('#', str_replace(' ', '',  $_POST['tags']));
             foreach($tags as $tag){
                 // check if tag exists
-                $tagEntry = $this->tagRepository->findOneBy(['title' => $tag]);
+                $tagEntry = !empty($tag) ? $this->tagRepository->findOneBy(['title' => $tag]) : null;
 
                 // if tag exists
                 if($tagEntry != null){
@@ -128,12 +136,12 @@ class AdminController{
                     $tagEntity->setTitle(strtoupper($tag));
                     $this->tagRepository->persist($tagEntity);
 
-                    $tEntity = $this->tagRepository->findOneBy(['title' => $tagEntity->getTitle()]);
+                    $tEntity = $this->tagRepository->findOneBy(['title' => $tagEntity->getTitle()])[0];
 
                     // add the new tag to the post list
                     $postTag = new PostsTags();
                     $postTag->setPost($post->getId());
-                    $postTag->setTag($tEntity[0] ->getId());
+                    $postTag->setTag($tEntity->getId());
                     (new PostsTagsRepository)->persist($postTag);
                 }
             }

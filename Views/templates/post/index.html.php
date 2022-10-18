@@ -12,7 +12,9 @@ ob_start(); ?>
                     <h3><?= $post->getTitle() ?></h3>
                         <div class="post-tag mb-4">
                             <?php foreach ((new PostsTagsRepository)->findBy(['post' => $post->getId()]) as $tag) : ?>
-                                    <span><?= (new TagRepository)->findOneBy(['id' => $tag->getId()])[0]->getTitle() ?></span>
+                                    <?php if((new TagRepository)->findOneBy(['id' => $tag->getId()])) : ?>
+                                        <span><?= (new TagRepository)->findOneBy(['id' => $tag->getId()])[0]->getTitle() ?></span>
+                                    <?php endif ?>
                             <?php endforeach ?>
                         </div>
                     <p><?= substr($post->getContent(), 0, 100) ?>...</p>
