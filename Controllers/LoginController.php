@@ -19,9 +19,9 @@ class LoginController{
 			$validation = [];
 
             $user = isset((new UserRepository)->findOneBy(['email' => $_POST['email']])[0]) ? 
-                (new UserRepository)->findOneBy(['email' => $_POST['email']])[0] : null;
+                (new UserRepository)->findOneBy(['email' => String::sanitize($_POST['email'])])[0] : null;
 
-            if(!password_verify($_POST['password'], $user->getPassword())){
+            if(!password_verify(String::sanitize($_POST['password']), $user->getPassword())){
 
                 $validation[] = "identifiants non reconnus";
 
@@ -33,11 +33,11 @@ class LoginController{
             }
 
             $session = new Session();
-            $session->set('firstname',$_POST['firstname']);
-            $session->set('lastname', $_POST['firstname']);
-            $session->set('email', $_POST['email']);
-            $session->set('role', $user->getRole());
-            $session->set('id', $user->getid());
+            $session->set('firstname', String::sanitize($_POST['firstname']));
+            $session->set('lastname', String::sanitize($_POST['firstname']));
+            $session->set('email', String::sanitize($_POST['email']));
+            $session->set('role', String::sanitize($user->getRole()), 'int');
+            $session->set('id', String::sanitize($user->getid()), 'int');
 
             header('Location:/home');
         }

@@ -1,35 +1,53 @@
 <?php ob_start(); ?>
 
-    <!-- Breadcrumbs-->
-    <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <a href="#">Dashboard</a>
-    </li>
-    <li class="breadcrumb-item active">My Dashboard</li>
-    </ol>
 
-      <!-- Icon Cards-->
       <div class="row">
+        <h5 class="my-5">My dashboard</h5>
         <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-dark o-hidden h-100">
-            <div class="card-header">
-                salut
-            </div>
-            <div class="card-body">
-                <div class="card-body-icon">
-                <i class="fa fa-fw fa-comments"></i>
+                <div class="card-body">
+                    <div class="card-body-icon">
+                    <i class="fa fa-fw fa-comments"></i>
+                    </div>
+                    <div class="mr-5"><?= $countPosts ?> blog-posts</div>
                 </div>
-                <div class="mr-5">26 New Messages!</div>
-            </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left text-dark">View Details</span>
-                <span class="float-right">
-                <i class="fa fa-angle-right"></i>
-                </span>
-            </a>
             </div>
         </div>
-      </div>
+        <div class="col-xl-3 col-sm-6 mb-3">
+            <div class="card text-dark o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                    <i class="fa fa-fw fa-comments"></i>
+                    </div>
+                    <div class="mr-5"><?= $countComments ?> commentaires</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-3">
+            <div class="card text-dark o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                    <i class="fa fa-fw fa-comments"></i>
+                    </div>
+                    <div class="mr-5"><?= count($users) ?> utilisateur(s) inscrit(s)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-3">
+            <div class="card text-dark o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                    <i class="fa fa-fw fa-comments"></i>
+                    </div>
+                    <div class="mr-5">26 New Messages!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h5></h5>
+
+    </div>
 
 <?php $baseAdmin = ob_get_clean(); ?>
 <?php require('./Views/layout/base-admin.php'); ?>

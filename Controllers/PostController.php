@@ -50,10 +50,10 @@ class PostController{
 			}
 
             $comment = new Comment();
-            $comment->setTitle($_POST['title']);
-            $comment->setContent($_POST['content']);
+            $comment->setTitle(String::sanitize($_POST['title']));
+            $comment->setContent(String::sanitize($_POST['content']));
             $comment->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
-            $comment->setAuthor($_SESSION['id']);
+            $comment->setAuthor(String::sanitize($_SESSION['id']), 'int');
             $comment->setPost($post->getId());
 
             (new CommentRepository())->persist($comment);

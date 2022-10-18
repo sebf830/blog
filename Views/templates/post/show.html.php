@@ -22,6 +22,7 @@ ob_start(); ?>
                         <span><?= (new TagRepository)->findOneBy(['id' => $tag->getId()])[0]->getTitle() ?></span>
                 <?php endforeach ?>
             </div>
+            <p class="my-5"><?= $post->getChapo() ?></p>
 
             <p class="my-5"><?= $post->getContent() ?></p>
 

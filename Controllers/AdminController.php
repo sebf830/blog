@@ -12,6 +12,7 @@ use App\Repository\TagRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Form\Validator\PostValidator;
+use App\Repository\CommentRepository;
 use App\Repository\PostsTagsRepository;
 use App\Repository\SocialNetworkRepository;
 
@@ -35,10 +36,10 @@ class AdminController{
 
 			$validation = [];
 
-            $user = isset($this->userRepository->findOneBy(['email' => $_POST['email']])[0]) ? 
-                $this->userRepository->findOneBy(['email' => $_POST['email']])[0] : null;
+            $user = isset($this->userRepository->findOneBy(['email' => String::sanitize($_POST['email'])])[0]) ? 
+                $this->userRepository->findOneBy(['email' => String::sanitize($_POST['email'])])[0] : null;
 
-            if(!password_verify($_POST['password'], $user->getPassword())){
+            if(!password_verify(String::sanitize($_POST['password']), $user->getPassword())){
 
                 $validation[] = "identifiants non reconnus";
 
@@ -60,9 +61,9 @@ class AdminController{
             }
 
             $session = new Session();
-            $session->set('firstname',$_POST['firstname']);
-            $session->set('lastname', $_POST['firstname']);
-            $session->set('email', $_POST['email']);
+            $session->set('firstname',String::sanitize($_POST['firstname']));
+            $session->set('lastname', String::sanitize($_POST['firstname']));
+            $session->set('email', String::sanitize($_POST['email']));
             $session->set('role', $user->getRole());
 
             header('Location:/dashboard');
@@ -77,7 +78,20 @@ class AdminController{
 
     public function dashboard(){
 
-        return View::render('admin/dashboard.html.php', []);
+        $users = $this->userRepository->findAll();
+        $posts = $this->postRepository->findAll();
+
+        $countComments = 0;
+        foreach($posts as $post){
+            $comments = count((new CommentRepository)->findBy(['post' => $post->getId()]));
+            $countComments += $comments;
+        }
+
+        return View::render('admin/dashboard.html.php', [
+            'users' => $users,
+            'countComments' => $countComments,
+            'countPosts' => count($posts)
+        ]);
     }
 
 
@@ -98,15 +112,15 @@ class AdminController{
 			}
 
             $post = new Post();
-            $post->setTitle($_POST['title']);
-            $post->setChapo($_POST['chapo']);
-            $post->setContent($_POST['content']);
+            $post->setTitle(String::sanitize($_POST['title']));
+            $post->setChapo(String::sanitize($_POST['chapo']));
+            $post->setContent(String::sanitize($_POST['content']));
             $post->setAuthor($_SESSION['id']);
-            $post->setSlug($_POST['title']);
+            $post->setSlug(String::sanitize($_POST['title']));
             $post->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
             
             // if a title already exists in database
-            if($this->postRepository->findOneBy(['title' => $_POST['title']])){
+            if($this->postRepository->findOneBy(['title' => String::sanitize($_POST['title'])])){
                 return View::render('admin/create.html.php', [
                     "form" => $postForm,
                     "validation" => ['Un  article avec le meme titre existe déja, veuillez modifier votre titre']
@@ -117,7 +131,7 @@ class AdminController{
             $post = $this->postRepository->findOneBy(['slug' => $post->getSlug()])[0];
 
             // create an array of tags
-            $tags = explode('#', str_replace(' ', '',  $_POST['tags']));
+            $tags = explode('#', str_replace(' ', '',  String::sanitize($_POST['tags'])));
             foreach($tags as $tag){
                 // check if tag exists
                 $tagEntry = !empty($tag) ? $this->tagRepository->findOneBy(['title' => $tag]) : null;
@@ -194,10 +208,10 @@ class AdminController{
                 ]);
 			}
 
-            $post->setTitle($_POST['title']);
-            $post->setSlug($_POST['title']);
-            $post->setChapo($_POST['chapo']);
-            $post->setContent($_POST['title']);
+            $post->setTitle(String::sanitize($_POST['title']));
+            $post->setSlug(String::sanitize($_POST['title']));
+            $post->setChapo(String::sanitize($_POST['chapo']));
+            $post->setContent(String::sanitize($_POST['title']));
 
 
             (new PostsTagsRepository)->deleteByPost($post->getId());
