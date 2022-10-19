@@ -25,7 +25,7 @@ ob_start(); ?>
 
             <?php View::renderForm("form",  $form) ?>
 
-                    <button type="submit" class="btn btn-secondary py-1 px-4 mt-3 mx-auto">valider</button>
+                <button type="submit" class="btn btn-secondary py-1 px-4 mt-3 mx-auto">valider</button>
 
             </div>
 

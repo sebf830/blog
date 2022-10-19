@@ -18,7 +18,7 @@
                 <li><a href="#">About</a></li>
                 <li><a href="/posts">Blog</a></li>
                 <li><a href="#">Contact</a></li>
-                <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') : ?>
+                <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) : ?>
                     <li><a href="/logout">Logout</a></li>
                 <?php else : ?>
                     <li><a href="/connexion-admin">Admin</a></li>

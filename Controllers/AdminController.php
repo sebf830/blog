@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use Exception;
 use App\core\View;
 use App\Models\Tag;
 use App\Models\Post;
@@ -28,19 +29,20 @@ class AdminController{
         $this->userRepository = new UserRepository;
         $this->tagRepository = new TagRepository;
     }
-
+    
     public function connexion($urlParam){
-
+        
         $socialnetworks = (new SocialNetworkRepository)->findAll();
-
+        
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-			$validation = [];
-
-            $user = isset($this->userRepository->findOneBy(['email' => StringHelper::sanitize($_POST['email'])])[0]) ? 
-                $this->userRepository->findOneBy(['email' => StringHelper::sanitize($_POST['email'])])[0] : null;
-
-            if(!password_verify(StringHelper::sanitize($_POST['password']), $user->getPassword())){
+            
+            $validation = [];
+            
+            $user = isset($this->userRepository->findOneBy(['email' => $_POST['email']])[0]) ? 
+            $this->userRepository->findOneBy(['email' => $_POST['email']])[0] : null;
+            
+            
+            if(!password_verify($_POST['password'], $user->getPassword())){
 
                 $validation[] = "identifiants non reconnus";
 
@@ -62,10 +64,12 @@ class AdminController{
             }
 
             $session = new Session();
-            $session->set('firstname',StringHelper::sanitize($_POST['firstname']));
-            $session->set('lastname', StringHelper::sanitize($_POST['firstname']));
-            $session->set('email', StringHelper::sanitize($_POST['email']));
+            $session->set('firstname', $user->getFirstname());
+            $session->set('lastname', $user->getLastname());
+            $session->set('email', $user->getEmail());
             $session->set('role', $user->getRole());
+            $session->set('id', $user->getId());
+            $session->set('admin', true);
 
             header('Location:/dashboard');
         }

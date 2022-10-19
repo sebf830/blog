@@ -8,9 +8,7 @@ class Session
     {
         if (session_status() === 1) {
             session_start();
-        } else {
-            echo "Session already initialized";
-        }
+        } 
     }
     public function set($key, $value)
     { 
