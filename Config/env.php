@@ -1,7 +1,7 @@
 <?php
 
 # environment dev/prod
-define("ENVIRONMENT", "dev");
+define("ENVIRONMENT", "prod");
 
 # root path 
 define("ROOT", str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
