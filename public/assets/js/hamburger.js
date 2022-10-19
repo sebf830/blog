@@ -1,7 +1,6 @@
 $(document).ready(function() {
-
-    $('#hamburger').on('click', function() {
-      $('#list').toggleClass('height-auto');
-      $('nav').toggleClass('height-fixed');
-    })
-    })
+  $("#hamburger").on("click", function() {
+    $("#list").toggleClass("height-auto");
+    $("nav").toggleClass("height-fixed");
+  })
+})
