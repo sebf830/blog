@@ -22,7 +22,7 @@ class Routes{
       "post" => ["controller" => "post", "action" => "show", "role" => ["public", "admin"]],
 
       // admin
-      "connexion-admin" => ["controller" => "admin", "action" => "connexion", "role" => ["admin"]],
+      "connexion-admin" => ["controller" => "admin", "action" => "connexion", "role" => ["public"]],
       "dashboard" => ["controller" => "admin", "action" => "dashboard", "role" => ["admin"]],
       "creer-un-post" => ["controller" => "admin", "action" => "createPost", "role" => ["admin"]],
       "modifier-un-post" => ["controller" => "admin", "action" => "showPosts", "role" => ["admin"]],

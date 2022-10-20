@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <?php include_once './Views/partials/head.php' ?>
 <body>
 
