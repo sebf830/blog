@@ -54,7 +54,7 @@ class PostController{
             $comment->setTitle(StringHelper::sanitize($_POST['title']));
             $comment->setContent(StringHelper::sanitize($_POST['content']));
             $comment->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
-            $comment->setAuthor(StringHelper::sanitize($_SESSION['id']), 'int');
+            $comment->setAuthor(StringHelper::sanitize($_SESSION['id']));
             $comment->setPost($post->getId());
 
             (new CommentRepository())->persist($comment);

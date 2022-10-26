@@ -4,14 +4,10 @@ namespace App\Helpers;
 
 class StringHelper
 {
-    public static function sanitize(string $string, ?string $cast = null)
+    public static function sanitize($var)
     {
-        $string = strip_tags(trim($string));
+        $var = (string)$var;
 
-        if($cast = 'int'){
-            return (int)$string;
-        }
-
-        return (string)$string;
+        return strip_tags(htmlspecialchars(trim($var)));
     }
 }

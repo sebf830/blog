@@ -24,6 +24,7 @@ class Slugger
             foreach ($chars as $key => $value) {
                 if ($title_chars[$i] == $key) {
                     $expected_chars[] = $value;
+                    
                 }
             }
             $expected_chars[] = $title_chars[$i];

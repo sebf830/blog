@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\core\Session;
 use App\Form\PostForm;
 use App\Form\LoginForm;
+use App\Helpers\Slugger;
 use App\Models\PostsTags;
 use App\Helpers\StringHelper;
 use App\Repository\TagRepository;
@@ -211,11 +212,14 @@ class AdminController{
                     "validation" => $validation
                 ]);
 			}
+            $slug = StringHelper::sanitize(Slugger::sluggify($_POST['title']));
 
             $post->setTitle(StringHelper::sanitize($_POST['title']));
-            $post->setSlug(StringHelper::sanitize($_POST['title']));
+            $post->setSlug($slug);
             $post->setChapo(StringHelper::sanitize($_POST['chapo']));
             $post->setContent(StringHelper::sanitize($_POST['title']));
+
+            $this->postRepository->persist($post);
 
 
             (new PostsTagsRepository)->deleteByPost($post->getId());
@@ -249,9 +253,9 @@ class AdminController{
                     (new PostsTagsRepository)->persist($postTag);
                 }
             }
-            $_SESSION['flash'] = "votre commentaire est enregistré";
+            $_SESSION['flash'] = "Le post est modifié";
 
-            header("Location:/modifier/post/{$post->getSlug()}");
+            header("Location:/modifier/post/{$slug}");
         }
 
         return View::render('admin/updatePost.html.php', [
