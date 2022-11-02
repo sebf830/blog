@@ -2,9 +2,6 @@
 use App\core\View;
 ob_start(); ?>
 
-<?php if(isset($_SESSION['flash'])) : ?>
-    <p class=" alert alert-success m-0 text-center" ><?= $_SESSION['flash'] ?></p>
-<?php endif ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
     <div class="col-md-6 mt-5">
@@ -19,9 +16,7 @@ ob_start(); ?>
                 </div>
              <?php endif ?>
              <?php if (!empty($success)) : ?>
-                <div class="p-2 m-3" style="background:lightgreen;color:green;border:1px solid grey">
-                        <p> <?= $success ?> </p>
-                </div>
+                    <p class="alert alert-success"> <?= $success ?> </p>
             <?php endif ?>
 
             <h1 class="main-heading">Modifier un post</h1>

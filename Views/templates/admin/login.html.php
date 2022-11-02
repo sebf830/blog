@@ -16,9 +16,7 @@ ob_start(); ?>
                 </div>
             <?php endif ?>
             <?php if (!empty($success)) : ?>
-                <div class="p-2 m-3" style="background:lightgreen;color:green;border:1px solid grey">
-                        <p> <?= $success ?> </p>
-                </div>
+                    <p class="alert alert-success"> <?= $success ?> </p>
             <?php endif ?>
 
             <h1 class="main-heading">Connexion admin</h1>

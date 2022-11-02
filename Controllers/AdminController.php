@@ -253,9 +253,11 @@ class AdminController{
                     (new PostsTagsRepository)->persist($postTag);
                 }
             }
-            $_SESSION['flash'] = "Le post est modifié";
-
-            header("Location:/modifier/post/{$slug}");
+            return View::render('admin/updatePost.html.php', [
+                'post' => $post,
+                'form' => $updateForm,
+                'success' => 'post modifié'
+            ]);
         }
 
         return View::render('admin/updatePost.html.php', [

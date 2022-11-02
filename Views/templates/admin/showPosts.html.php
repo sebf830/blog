@@ -6,6 +6,7 @@ ob_start(); ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-12">
+           
             <h5>Modifier/supprimer des posts</h5>
             <table class="table table-striped mt-3">
                 <thead>
