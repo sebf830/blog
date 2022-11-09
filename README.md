@@ -6,15 +6,19 @@
 
 ## Comment utiliser l'application ?
 
-### configuration
+### installation 
 
 #### Le projet fonctionne avec PHP8 et mysql.
 
-### installation 
-
 - cloner le projet
-- installer PHP, composer, mysql
-- run composer install
+- installer PHP, composer, mysql sur votre machine
+- Dans le projet, run composer install
 - start the server : php -S localhost:{your port}
+
+### configuration 
+
+- dans la section "sql" du fichier env, renseignez vos valeurs de connection à votre base de donnée.
+- Le système d'envoi d'email fonctionne grace à gmail, dans la section email, remplacer l'addresse email ainsi que le mot de passe associé à votre machine 
+- Pour créer un mot de passe, connectez-vous à votre compte Google et créez un "mot de passe d'application".
 
 
