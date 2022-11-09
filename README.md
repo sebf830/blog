@@ -6,9 +6,9 @@
 
 ## Comment utiliser l'application ?
 
-## configuration
+### configuration
 
-### Le projet fonctionne avec PHP8 et mysql.
+#### Le projet fonctionne avec PHP8 et mysql.
 
 ### installation 
 
