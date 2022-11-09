@@ -15,7 +15,6 @@ nav {
   overflow: hidden;
   font-family: 'Open Sans', sans-serif;
   transition: .5s;
-
 }
 
 .nav-cont {
@@ -67,7 +66,6 @@ nav {
 }
 
 /* header */
-
 .box {
   position: relative;
 }
@@ -75,12 +73,10 @@ nav {
 .box img {
   opacity: 0.5;
 }
-
 /* header */
 
 
 /* contact */
-
 #contact-form {
   width: 100%;
 }
@@ -101,11 +97,9 @@ nav {
 #list .login .nav-inscription:hover {
   color: lightblue;
 }
-
 /* contact */
 
 /* tag */
-
 .post-tag {
   display: flex;
 }
@@ -119,16 +113,13 @@ nav {
   font-weight: bold;
   color: white;
 }
-
 /* tag */
 
 /* post show */
-
 .authorAvatar {
   border-radius: 50%;
   padding: 15px 18px 15px 18px;
 }
-
 /* post show */
 
 
@@ -150,7 +141,6 @@ nav {
   .height-fixed {
     transition: 1s;
     height: 350px;
-
   }
 
   nav {
@@ -226,7 +216,6 @@ nav {
 }
 
 /** footer **/
-
 footer {
   background-color: rgb(36, 51, 66);
   text-align: center;

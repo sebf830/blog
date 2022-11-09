@@ -35,15 +35,18 @@ class AdminController{
         
         $socialnetworks = (new SocialNetworkRepository)->findAll();
         
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST) && !empty($_POST)){
             
             $validation = [];
+
+            $email = isset($_POST['email']) ? StringHelper::sanitize($_POST['email']) : null;
+            $password = isset($_POST['password']) ? StringHelper::sanitize($_POST['password']) : null;
             
-            $user = isset($this->userRepository->findOneBy(['email' => $_POST['email']])[0]) ? 
-            $this->userRepository->findOneBy(['email' => $_POST['email']])[0] : null;
+            $user = isset($this->userRepository->findOneBy(['email' => $email])[0]) ? 
+            $this->userRepository->findOneBy(['email' => $email])[0] : null;
             
             
-            if(!password_verify($_POST['password'], $user->getPassword())){
+            if(!password_verify($password, $user->getPassword())){
 
                 $validation[] = "identifiants non reconnus";
 
@@ -105,7 +108,7 @@ class AdminController{
         $_SESSION['id'] = 1;
         $postForm = (new PostForm)->build();
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST) && !empty($_POST)){
 
 			$validation = PostValidator::checkForm($postForm, $_POST);
 
@@ -117,11 +120,11 @@ class AdminController{
 			}
 
             $post = new Post();
-            $post->setTitle(StringHelper::sanitize($_POST['title']));
-            $post->setChapo(StringHelper::sanitize($_POST['chapo']));
-            $post->setContent(StringHelper::sanitize($_POST['content']));
+            $post->setTitle(isset($_POST['title']) ? StringHelper::sanitize($_POST['title']) : null);
+            $post->setChapo(isset($_POST['chapo']) ? StringHelper::sanitize($_POST['chapo']) : null);
+            $post->setContent(isset($_POST['content']) ? StringHelper::sanitize($_POST['content']) : null);
             $post->setAuthor($_SESSION['id']);
-            $post->setSlug(StringHelper::sanitize($_POST['title']));
+            $post->setSlug(isset($_POST['title']) ? StringHelper::sanitize(Slugger::sluggify($_POST['title'])) : null);
             $post->setCreatedAt((new \Datetime('now'))->format('Y-m-d H:i:s'));
             
             // if a title already exists in database
@@ -202,7 +205,7 @@ class AdminController{
             'tags' => implode('#', $tagList)
         ]);
         
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST) && !empty($_POST)){
 
             $validation = PostValidator::checkForm($updateForm, $_POST);
 			if ($validation && count($validation) > 0) {
@@ -212,12 +215,13 @@ class AdminController{
                     "validation" => $validation
                 ]);
 			}
-            $slug = StringHelper::sanitize(Slugger::sluggify($_POST['title']));
+            
+            $slug = isset($_POST['title']) ? StringHelper::sanitize(Slugger::sluggify($_POST['title'])) : null;
 
-            $post->setTitle(StringHelper::sanitize($_POST['title']));
-            $post->setSlug($slug);
-            $post->setChapo(StringHelper::sanitize($_POST['chapo']));
-            $post->setContent(StringHelper::sanitize($_POST['title']));
+            isset($_POST['title']) ? $post->setTitle(StringHelper::sanitize($_POST['title'])) : false;
+            !empty($slug) ? $post->setSlug($slug) : false;
+            isset($_POST['chapo']) ? $post->setChapo(StringHelper::sanitize($_POST['chapo'])) : false;
+            isset($_POST['content']) ? $post->setContent(StringHelper::sanitize($_POST['content'])) : false;
 
             $this->postRepository->persist($post);
 

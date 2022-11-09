@@ -15,14 +15,17 @@ class LoginController{
         $socialnetworks = (new SocialNetworkRepository)->findAll();
         $loginForm = (new LoginForm)->build();
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST) && !empty($_POST)){
 
 			$validation = [];
 
-            $user = isset((new UserRepository)->findOneBy(['email' => $_POST['email']])[0]) ? 
-                (new UserRepository)->findOneBy(['email' => $_POST['email']])[0] : null;
+            $email = isset($_POST['email']) ? StringHelper::sanitize($_POST['email']) : null;
+            $password = isset($_POST['password']) ? $_POST['password'] : null;
 
-            if(!password_verify($_POST['password'], $user->getPassword())){
+            $user = isset((new UserRepository)->findOneBy(['email' => $email])[0]) ? 
+                (new UserRepository)->findOneBy(['email' => $email])[0] : null;
+
+            if(!password_verify($password, $user->getPassword())){
 
                 $validation[] = "identifiants non reconnus";
 

@@ -16,7 +16,7 @@ class RegistrationController{
         $socialnetworks = (new SocialNetworkRepository)->findAll();
         $registerForm = (new RegisterForm)->build();
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST) && !empty($_POST)){
 
 			$validation = RegisterValidator::checkForm($registerForm, $_POST);
 
@@ -30,11 +30,11 @@ class RegistrationController{
 			}
 
             $user = new User();
-            $user->setFirstname(StringHelper::sanitize($_POST['firstname']));
-            $user->setLastname(StringHelper::sanitize($_POST['lastname']));
-            $user->setEmail(StringHelper::sanitize($_POST['email']));
+            $user->setFirstname(isset($_POST['firstname']) ? StringHelper::sanitize($_POST['firstname']) : null);
+            $user->setLastname(isset($_POST['lastname']) ? StringHelper::sanitize($_POST['lastname']) : null);
+            $user->setEmail(isset($_POST['email']) ? StringHelper::sanitize($_POST['email']) : null);
             $user->setRole('user');
-            $user->setPassword(password_hash(StringHelper::sanitize($_POST['password']), PASSWORD_DEFAULT));
+            $user->setPassword(isset($_POST['password']) ? password_hash(StringHelper::sanitize($_POST['password']), PASSWORD_DEFAULT) : null);
 
             (new UserRepository)->persist($user);
             
@@ -46,7 +46,6 @@ class RegistrationController{
                 "socials" => $socialnetworks,
             ]);
         }
-
 
         return View::render('register.html.php', [
             "form" => $registerForm,

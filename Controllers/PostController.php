@@ -35,7 +35,7 @@ class PostController{
         $commentForm = (new CommentForm())->build();
         $comments = (new CommentRepository)->getCommentsByPost($author->getId(), $post->getId());
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST) && !empty($_POST)){
 
             $validation = CommentValidator::checkForm($commentForm, $_POST);
 
