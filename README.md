@@ -18,7 +18,9 @@
 ### configuration 
 
 - dans la section "sql" du fichier env, renseignez vos valeurs de connection à votre base de donnée.
+- créer la base de donnée et importer le fichier .sql
 - Le système d'envoi d'email fonctionne grace à gmail, dans la section email, remplacer l'addresse email ainsi que le mot de passe associé à votre machine 
 - Pour créer un mot de passe, connectez-vous à votre compte Google et créez un "mot de passe d'application".
+- Les crédentials de l'admin par défaut sont : admin@gmail.com:admin123
 
 
